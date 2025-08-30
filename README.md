@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Need-A-Chef
+
+Need-A-Chef is a comprehensive platform that connects users with professional chefs for various culinary services. It also provides an e-commerce platform for purchasing culinary products, a learning portal for cooking courses, and a partner program for referrals.
+
+**Live Link:** [needachef.com](https://needachef.com)
+
+**GitHub Repository:** [https://github.com/techneedachef-sudo/needachef](https://github.com/techneedachef-sudo/needachef)
+
+![App Screenshot](public/image.png)
+
+## Technologies Used
+
+- **Frontend:** Next.js (React), TypeScript, Tailwind CSS, Mantine
+- **Backend:** Next.js API Routes, Prisma, PostgreSQL
+- **Authentication:** JWT (jose)
+- **Payments:** Stripe
+- **Email:** Resend
+- **File Storage:** Vercel Blob
+- **Testing:** Jest, React Testing Library
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these simple steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+### Prerequisites
+
+- Node.js (v20.x or later)
+- pnpm
+- PostgreSQL
+
+### Installation
+
+1.  **Clone the repo**
+    ```sh
+    git clone https://github.com/techneedachef-sudo/needachef.git
+    ```
+2.  **Install NPM packages**
+    ```sh
+    pnpm install
+    ```
+3.  **Set up environment variables**
+
+    Create a `.env` file in the root of the project and add the following environment variables:
+
+    ```env
+    DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+    NEXTAUTH_SECRET="your-nextauth-secret"
+    STRIPE_SECRET_KEY="your-stripe-secret-key"
+    STRIPE_PUBLIC_KEY="your-stripe-public-key"
+    RESEND_API_KEY="your-resend-api-key"
+    BLOB_READ_WRITE_TOKEN="your-vercel-blob-token"
+    ```
+
+4.  **Run database migrations**
+    ```sh
+    pnpm prisma migrate dev
+    ```
+5.  **Seed the database**
+    ```sh
+    pnpm prisma db seed
+    ```
+
+### Running the Application
+
+```sh
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Chef Booking:** Users can book chefs for various events and services.
+- **E-commerce Store:** A shop to buy culinary products.
+- **Learning Portal:** Users can enroll in cooking courses.
+- **User Dashboard:** Users can manage their bookings, orders, and learning progress.
+- **Admin Panel:** An administrative interface to manage users, chefs, bookings, orders, courses, and content.
+- **Partner Program:** A referral program for partners to earn commissions.
+- **Chef Application:** Chefs can apply to join the platform.
 
-## Learn More
+## Folder Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+needachef/
+├── app/                # Next.js App Router pages and API routes
+│   ├── api/            # API routes
+│   ├── admin/          # Admin panel pages
+│   ├── dashboard/      # User dashboard pages
+│   ├── partner/        # Partner panel pages
+│   └── ...             # Other pages (login, signup, etc.)
+├── components/         # Reusable React components
+│   ├── admin/          # Components for the admin panel
+│   ├── auth/           # Authentication related components
+│   ├── dashboard/      # Components for the user dashboard
+│   ├── emails/         # Email templates
+│   └── ...             # Other general components
+├── prisma/             # Prisma schema and migrations
+├── public/             # Static assets
+└── utils/              # Utility functions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The API routes are located in `app/api/`. They handle various functionalities such as:
 
-## Deploy on Vercel
+- User authentication (login, signup, password reset)
+- Chef applications
+- Bookings and payments
+- E-commerce orders
+- Course management
+- Admin actions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For more details, please refer to the `documentation.md` file.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The application is deployed on Vercel. The `main` branch is automatically deployed to the production environment.
