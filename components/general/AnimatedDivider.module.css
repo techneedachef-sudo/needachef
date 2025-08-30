@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.line {
+  height: 2px;
+  background-color: var(--mantine-color-orange-6);
+  transform-origin: center;
+}

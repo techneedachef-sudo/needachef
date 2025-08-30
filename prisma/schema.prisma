@@ -1,0 +1,264 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String            @id @default(cuid())
+  name                 String
+  email                String            @unique
+  passwordHash         String
+  role                 Role              @default(USER)
+  profilePicture       String?
+  phone                String?
+  address              String?
+  bio                  String?
+  chefProfile          ChefProfile?
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+  referralCode         String?           @unique
+  paymentMethod        String?           // New field for partner payment method
+  paymentDetail        String?           // New field for partner payment detail
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  orders               Order[]
+  bookings             Booking[]
+  chefBookings         Booking[]         @relation("ChefBookings")
+  reviews              Review[]
+  chefApplication      ChefApplication[]
+  partnerInquiries     Inquiry[]
+  courseProgress       UserCourseProgress[]
+  partnerBookings      Booking[]         @relation("PartnerBookings") // New inverse relation for partner bookings
+}
+
+model UserCourseProgress {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  courseId          String
+  course            Course   @relation(fields: [courseId], references: [id])
+  completedLessons  String[]
+  lastViewedLesson  String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([userId, courseId])
+}
+
+
+model ChefProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
+  specialties       String[]
+  yearsOfExperience Int
+  portfolioImages   String[]
+}
+
+model ChefApplication {
+  id         String                   @id @default(cuid())
+  userId     String
+  user       User                     @relation(fields: [userId], references: [id])
+  fullName   String
+  email      String
+  phone      String
+  chefLevel  String
+  experience String
+  bio        String
+  resume     String?
+  status     ChefApplicationStatus    @default(PENDING)
+  createdAt  DateTime                 @default(now())
+  updatedAt  DateTime                 @updatedAt
+}
+
+model Inquiry {
+  id           String        @id @default(cuid())
+  companyName  String
+  contactName  String
+  email        String
+  phone        String
+  message      String
+  status       InquiryStatus @default(NEW)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  ref          String?
+  utm_source   String?
+  utm_medium   String?
+  utm_campaign String?
+  partnerUrl   String?
+  partnerId    String?
+  partner      User?         @relation(fields: [partnerId], references: [id])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id])
+  customerName    String
+  customerEmail   String
+  total           Int
+  status          OrderStatus @default(PENDING)
+  date            DateTime
+  items           Json
+  shippingAddress Json
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  price       Int
+  stock       Int
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  duration    String
+  price       Int
+  description String
+  modules     Module[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  progress    UserCourseProgress[]
+}
+
+model Module {
+  id        String   @id @default(cuid())
+  title     String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  lessons   Lesson[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id        String   @id @default(cuid())
+  title     String
+  videoUrl  String?
+  content   String?
+  moduleId  String
+  module    Module   @relation(fields: [moduleId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id                  String        @id @default(cuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id])
+  chefId              String?
+  chef                User?         @relation("ChefBookings", fields: [chefId], references: [id])
+  partnerId           String?       // New field for referral tracking
+  partner             User?         @relation("PartnerBookings", fields: [partnerId], references: [id])
+  transactionId       String?       // New field for payment gateway transaction ID
+  paymentReference    String?       // New field for payment gateway reference
+  paymentAmount       Int?          // New field for the amount paid
+  paymentStatus       PaymentStatus @default(PENDING) // New field for payment status
+  date                DateTime
+  time                String
+  location            String
+  guests              Int
+  status              BookingStatus @default(PENDING)
+  eventType           String?
+  cuisinePreferences  String[]
+  dietaryRestrictions String?
+  kitchenEquipment    String[]
+  details             String?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  ref                 String?
+  utm_source          String?
+  utm_medium          String?
+  utm_campaign        String?
+  partnerUrl          String?
+  serviceId           String?
+  service             Service?      @relation(fields: [serviceId], references: [id])
+}
+
+model Service {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  icon        String?
+  type        ServiceType
+  options     Json? // For tiered services: ServiceTierOption[]
+  price       String? // For per-head services
+  minGuests   String? // For per-head services
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  bookings    Booking[]
+}
+
+enum ServiceType {
+  TIERED
+  PER_HEAD
+}
+
+enum Role {
+  USER
+  ADMIN
+  CHEF
+  PARTNER
+}
+
+enum ChefApplicationStatus {
+  PENDING
+  REVIEWED
+  APPROVED
+  DENIED
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}

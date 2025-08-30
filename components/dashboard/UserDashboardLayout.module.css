@@ -1,0 +1,26 @@
+.shell {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+}
+
+.header {
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.navbar {
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  border-right: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.main {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+}
+
+.navLink {
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 500;
+
+  &[data-active] {
+    background-color: var(--mantine-color-orange-filled);
+    color: var(--mantine-color-white);
+  }
+}

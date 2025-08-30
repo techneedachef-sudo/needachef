@@ -1,0 +1,43 @@
+.card {
+  padding: var(--mantine-spacing-xl);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  break-inside: avoid-column; /* Crucial for masonry layout */
+  margin-bottom: var(--mantine-spacing-md); /* Gap between rows */
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--mantine-shadow-lg);
+  }
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: var(--mantine-font-size-lg);
+}
+
+.masonryGrid {
+  column-count: 1;
+  column-gap: var(--mantine-spacing-xl);
+
+  @media (min-width: 576px) { /* sm breakpoint */
+    column-count: 2;
+  }
+
+  @media (min-width: 992px) { /* lg breakpoint */
+    column-count: 3;
+  }
+}
+
+.masonryGridPerHead {
+  column-count: 1;
+  column-gap: var(--mantine-spacing-xl);
+  margin: 0 auto; /* Center the grid */
+
+  @media (min-width: 576px) { /* sm breakpoint */
+    column-count: 2;
+  }
+
+  @media (min-width: 1200px) { /* xl breakpoint, or adjust as needed */
+    column-count: 4;
+  }
+}

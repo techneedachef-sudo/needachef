@@ -1,0 +1,30 @@
+.wrapper {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+    padding-top: calc(var(--mantine-spacing-xl) * 2);
+    padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+}
+
+.inner {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    max-width: 600px;
+    text-align: center;
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 900;
+
+    @media (max-width: 48em) {
+      font-size: 24px;
+    }
+}
+
+.button {
+    @media (max-width: 48em) {
+        width: 100%;
+    }
+}

@@ -1,0 +1,70 @@
+{
+  "homepage": {
+    "hero": {
+      "title": "Find the Perfect Chef for Any Occasion",
+      "subtitle": "From intimate in-home dining to large-scale corporate events, Needachef connects you with top-tier culinary professionals. Experience excellence, reliability, and unforgettable flavors."
+    },
+    "services": {
+      "title": "Our Culinary Services",
+      "description": "We offer a comprehensive range of services to meet your culinary needs. Whether you're a business seeking support or an individual looking for a private chef, we have a solution for you."
+    },
+    "promo": {
+        "title": "Launch Your Food Brand",
+        "text": "From product development to branding and marketing, we provide the expertise to turn your culinary ideas into a successful business. Let us help you tell your story and captivate your audience."
+    }
+  },
+  "servicesPage": {
+    "title": "Explore Our Services",
+    "intro": "Discover the wide array of professional culinary and hospitality solutions we provide. Our commitment is to deliver excellence and elevate standards in every kitchen we touch."
+  },
+  "partnersPage": {
+    "title": "Partner with Needachef",
+    "intro": "Join our network of partners and offer your clients an exclusive culinary experience. We work with hotels, short-let platforms, and tour operators to provide seamless chef booking services.",
+    "widgetTitle": "Embed Our Booking Widget",
+    "widgetText": "Add a \"Book a Chef\" button to your website with one simple line of code. It's the easiest way to provide a premium service to your guests and track your referrals.",
+    "widgetAlertTitle": "How it Works",
+    "widgetAlertText": "Our script adds a non-intrusive button to the bottom-right corner of your site. When clicked, a pop-up form appears, allowing users to book a chef without leaving your page. We handle the rest!",
+    "formTitle": "Become an Official Partner"
+  },
+  "chefApplicationPage": {
+    "title": "Join Our Culinary Team",
+    "intro": "Complete the application below to start your journey with Needachef. We are looking for passionate and talented chefs to join our network."
+  },
+  "testimonials": [
+    {
+      "name": "John Doe",
+      "title": "Corporate Event Client",
+      "review": "The chefs were professional, punctual, and the food was exceptional. Our clients were thoroughly impressed. Needachef made our event a massive success!"
+    },
+    {
+      "name": "Jane Smith",
+      "title": "Private Dinner Host",
+      "review": "An unforgettable dining experience at home. The chef was incredibly talented and created a menu that was both delicious and beautifully presented."
+    },
+    {
+      "name": "Samuel Green",
+      "title": "Restaurant Owner",
+      "review": "Their culinary consulting service is a game-changer. They helped us revamp our menu and optimize kitchen workflow, leading to a significant increase in efficiency."
+    },
+    {
+      "name": "Maria Garcia",
+      "title": "Newly-wed",
+      "review": "We hired a private chef for our anniversary, and it was the best decision. The attention to detail and the quality of the food were outstanding."
+    }
+  ],
+  "footer": {
+    "contact": {
+      "email": "contact@needachef.ng",
+      "phone": "+234 806 495 0555",
+      "address": "Lagos, Nigeria"
+    },
+    "socials": [
+      { "name": "Instagram", "url": "https://instagram.com" },
+      { "name": "Facebook", "url": "https://facebook.com" },
+      { "name": "X", "url": "https://x.com" },
+      { "name": "LinkedIn", "url": "https://linkedin.com" },
+      { "name": "TikTok", "url": "https://tiktok.com" }
+    ],
+    "whatsappNumber": "2348064950555"
+  }
+}
